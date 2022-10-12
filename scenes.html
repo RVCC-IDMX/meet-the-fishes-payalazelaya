@@ -242,12 +242,12 @@
     scene4Paragraph.anchor.set(1, 0);
     scene4Paragraph.position.set(view.width - 5, 5);
 
-    // Using our button object let's create a "next" button.
-    let nextButton4 = UI.Button(0,0,"Next >", {backgroundColor: 0xFAA0A0, textStyle: buttonStyle});
+    // // Using our button object let's create a "next" button.
+    // let nextButton4 = UI.Button(0,0,"Next >", {backgroundColor: 0xFAA0A0, textStyle: buttonStyle});
 
-    // Let's place it in the bottom right-hand corner of the screen (regardless of size)
-    nextButton4.x = view.width  - nextButton4.width;
-    nextButton4.y = view.height - nextButton4.height;
+    // // Let's place it in the bottom right-hand corner of the screen (regardless of size)
+    // nextButton4.x = view.width  - nextButton4.width;
+    // nextButton4.y = view.height - nextButton4.height;
 
     //U sing our button object let's create a "back" button.
     let backButton3 = UI.Button(0,0,"< Back", {backgroundColor: 0xFAA0A0, textStyle: buttonStyle});
@@ -270,7 +270,7 @@
     moveTropicalFish();
     scene4.addChild(scene4Title);
     scene4.addChild(scene4Paragraph);
-    scene4.addChild(nextButton4);
+    //scene4.addChild(nextButton4);
     scene4.addChild(backButton3);
     scene4.addChild(tropicalFish);
 
@@ -543,27 +543,27 @@
     Director.addScene("fourth", scene4);
 
     nextButton.onclick = (e) => {
-        Director.swipe(Director.scene["first"], Director.scene["second"], {direction: "left"});
+        Director.swipe(Director.scene["first"], Director.scene["second"], {direction: "up"});
     }
 
     nextButton2.onclick = (e) => {
-        Director.swipe(Director.scene["second"], Director.scene["third"], {direction: "left"});
+        Director.swipe(Director.scene["second"], Director.scene["third"], {direction: "down"});
     }
 
     nextButton3.onclick = (e) => {
-        Director.swipe(Director.scene["third"], Director.scene["fourth"], {direction: "left"});
+        Director.swipe(Director.scene["third"], Director.scene["fourth"], {direction: "up"});
     }
 
     backButton.onclick = (e) => {
-        Director.swipe(Director.scene["second"], Director.scene["first"], {direction: "right"});
+        Director.swipe(Director.scene["second"], Director.scene["first"], {direction: "down"});
     }
 
     backButton2.onclick = (e) => {
-        Director.swipe(Director.scene["third"], Director.scene["second"], {direction: "right"});
+        Director.swipe(Director.scene["third"], Director.scene["second"], {direction: "up"});
     }
 
     backButton3.onclick = (e) => {
-        Director.swipe(Director.scene["fourth"], Director.scene["third"], {direction: "right"});
+        Director.swipe(Director.scene["fourth"], Director.scene["third"], {direction: "down"});
     }
 
     /*
