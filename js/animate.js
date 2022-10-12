@@ -11,6 +11,52 @@ Animate.easeIn  = (x) => x * x;
 Animate.easeOut = (x) => 1 - (1 - x) * (1 - x);
 Animate.easeInOut = (x) => x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2;
 
+Animate.wobbleto = function(obj, end) {
+    return new Promise((resolve, reject) => {
+        let start = {
+            x: obj.x,
+            y: obj.y,
+        }
+
+        if (end.duration == undefined) end.duration = 0;
+        if (end.easing == undefined) end.easing = Animate.linear; 
+
+        var startTime = Date.now();
+
+        function loop() {
+
+            let ticker = Date.now() - startTime;
+            let delta = ticker/end.duration;
+            let ease = end.easing(delta);
+
+            let wobble1 = Math.sin(ticker/200) * 20;
+
+            if (delta >= 1 || end.duration === 0) {
+                obj.x = end.x;
+                obj.y = end.y;
+
+                resolve();
+                return;
+            }
+
+
+            let lerp = (a, b, n) => {
+                return (1 - n) * a + n * b;
+            }
+
+
+            obj.x = lerp(start.x,end.x,ease);
+            obj.y = lerp(start.y,end.y,ease);
+            obj.y += wobble1;
+            obj.animationID = requestAnimationFrame(loop);
+
+        }
+        cancelAnimationFrame(obj.animationID);
+        loop();
+
+    });
+}
+
 //Animate to
 Animate.to = function(obj,end) {
 
@@ -27,7 +73,7 @@ Animate.to = function(obj,end) {
                 x : obj.scale.x,
                 y : obj.scale.y
             },
-            rotation : obj.rotation,
+            angle : obj.angle,
             tint : obj.tint,
             alpha : obj.alpha
         }
@@ -55,7 +101,7 @@ Animate.to = function(obj,end) {
                 if (end.x != undefined) obj.x = end.x;
                 if (end.y != undefined)obj.y = end.y;
                 if (end.scale != undefined) obj.scale.set(end.scale.x,end.scale.y);
-                if (end.rotation != undefined) obj.rotation = end.rotation;
+                if (end.angle != undefined) obj.angle = end.angle;
                 if (end.tint != undefined) obj.tint = end.tint;
                 if (end.alpha != undefined) obj.alpha = end.alpha;
                 console.log("Done!");
@@ -84,8 +130,8 @@ Animate.to = function(obj,end) {
                 );
 
             //Lerp our rotation -- we'll need to clean this up, but later
-            if (end.rotation != undefined)
-                obj.rotation = lerp(start.rotation,end.rotation,ease);
+            if (end.angle != undefined)
+                obj.angle = lerp(start.angle, end.angle, ease);
 
             //Lerp our tint -- we'll also need to clean this up for each channel, but later
             if (end.tint != undefined)
