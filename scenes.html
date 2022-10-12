@@ -78,6 +78,13 @@
         textBaseline: "bottom"
     })
 
+    //Paragraph Text Style 
+    const pStyle = new PIXI.TextStyle({
+        fill: "#000000",
+        fontFamily: "Verdana",
+        fontSize: 20,
+    });
+
 
     //SCENE 1
     let scene1 = new PIXI.Container();
@@ -88,9 +95,6 @@
     //Let's place it in the bottom right-hand corner of the screen (regardless of size)
     nextButton.x = view.width  - nextButton.width;
     nextButton.y = view.height - nextButton.height;
-
-    //And place it into the scene
-    scene1.addChild(nextButton);
 
     //And let's add some text to tell us which scene we're on
     let scene1Text = new PIXI.Text("Scene 1",{fill:0x000000});
@@ -131,6 +135,7 @@
 
     //And place it into the scene
     // scene1.addChild(scene1Text);
+    scene1.addChild(nextButton);
     scene1.addChild(title);
 
     introAnimation();
@@ -156,6 +161,10 @@
     let scene2Title = new PIXI.Text("Terry", sceneTitleStyle);
     scene2Title.position.set(10,10);
 
+    let scene2Paragraph = new PIXI.Text("Terry is the second to youngest fish out of the three", pStyle);
+    scene2Paragraph.anchor.set(1, 0);
+    scene2Paragraph.position.set(view.width - 5, 5);
+
     //Add first fish
     let angelFish = new PIXI.Sprite.from('img/angel_fish.png');
     angelFish.anchor.set(.4);
@@ -174,6 +183,7 @@
     moveAngelFish();
 
     scene2.addChild(scene2Title);
+    scene2.addChild(scene2Paragraph);
     scene2.addChild(angelFish);
     scene2.addChild(nextButton2);
     scene2.addChild(backButton);
@@ -198,6 +208,10 @@
      let scene3Title = new PIXI.Text("Daniel", sceneTitleStyle);
      scene3Title.position.set(10,10);
 
+     let scene3Paragraph = new PIXI.Text("Daniel is the oldest fish out of the three", pStyle);
+     scene3Paragraph.anchor.set(1, 0);
+     scene3Paragraph.position.set(view.width - 5, 5);
+
     // Add second fish
     let colorfulFish = new PIXI.Sprite.from('img/colorful_fish.png');
     colorfulFish.anchor.set(.4);
@@ -215,6 +229,7 @@
     scene3.addChild(nextButton3);
     scene3.addChild(backButton2);
     scene3.addChild(scene3Title);
+    scene3.addChild(scene3Paragraph);
     scene3.addChild(colorfulFish);
 
     //SCENE 4
@@ -222,6 +237,10 @@
 
     let scene4Title = new PIXI.Text("Kamal", sceneTitleStyle);
     scene4Title.position.set(10, 10);
+
+    let scene4Paragraph = new PIXI.Text("Kamal is the youngest fish out of the three", pStyle);
+    scene4Paragraph.anchor.set(1, 0);
+    scene4Paragraph.position.set(view.width - 5, 5);
 
     // Using our button object let's create a "next" button.
     let nextButton4 = UI.Button(0,0,"Next >", {backgroundColor: 0xFAA0A0, textStyle: buttonStyle});
@@ -250,6 +269,7 @@
     }
     moveTropicalFish();
     scene4.addChild(scene4Title);
+    scene4.addChild(scene4Paragraph);
     scene4.addChild(nextButton4);
     scene4.addChild(backButton3);
     scene4.addChild(tropicalFish);
